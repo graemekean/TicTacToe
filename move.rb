@@ -8,4 +8,13 @@ class Move
     @player = player
   end
 
+  # def valid?(g)
+  #   binding.pry
+  #   case g.used_squares.include?()
+
+
+  #   # case g.moves.contains?(g.moves.last.square)
+
+  # end
+
 end

@@ -2,18 +2,27 @@ class Game
 
 
   attr_accessor :player1, :player2
-  attr_reader :moves
+  attr_reader :moves, :used_squares
 
   WINNING_LINES = [[0,1,2],[3,4,5],[6,7,8],
-                   [0,3,6],[1,4,7],[2,5,8],
-                   [0,4,8],[2,4,6]]
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6]]
 
   def initialize
     @moves = []
+    @used_squares = []
   end
 
   def make_move(player, square)
-    @moves << Move.new(player, square, symbol_for_player(player))
+    if square >= 0 && square < 9 && !@used_squares.include?(square)
+      @moves << Move.new(player, square, symbol_for_player(player))
+      @used_squares << square
+    else
+      puts "That is not a valid selection"
+      sleep(2)
+
+
+    end
   end
 
   def finished?
@@ -48,12 +57,11 @@ class Game
     else
       "The game is still in progress."
     end
-    
   end
 
   def whose_turn
     return player1 if moves.empty?
-    moves.last.player == player1 ? player2 : player1
+    moves.last.player == player1 ? player2 : player1 #ternary operator
   end
 
   private
